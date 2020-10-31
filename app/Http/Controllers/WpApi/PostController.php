@@ -67,7 +67,7 @@ public function insert(Request $request){
         $errors = $e->getResponse()->getBody();
         return response($errors,$e->getCode());
     }
-}//end of all
+}//end of insert
 
 
 }
