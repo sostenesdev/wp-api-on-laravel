@@ -8,42 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller{
 
-    public function getToken()
-    {
-        $url = config('services.wp_api.url').'/oauth/authorize/?client_id='.config('services.wp_api.client_id').'&response_type=code';
-        return redirect()->away($url);
-    }
-
-    public function processToken(Request $request)
-    {
+    public function getAccessToken(){
         $client = new \GuzzleHttp\Client();
 
-        $url = config('services.wp_api.url').'/oauth/token';
+        $url = config('services.wp_api.url').'/wp-json/jwt-auth/v1/token';
 
         $data = [
-        'grant_type' => 'authorization_code',
-        'code' => $request->code,
-        'client_id' => config('services.wp_api.client_id'),
-        'client_secret' => config('services.wp_api.client_secret')
+        'username' => env('WP_USERNAME'),
+        'password' => env('WP_PASSWORD')
         ];
 
         $params = [
             'form_params' => $data,
             'headers' => [
-                'Accept' => 'application/json'
             ]
         ];
 
         try {
             $response = $client->request('POST', $url, $params);
             $decodedBody = json_decode($response->getBody()->getContents(), true);
+            $auth_info = (object)$decodedBody['data'];
 
-            $accessToken = $decodedBody['access_token'];
-
-            if ($accessToken) {
-                session(['acess-token'=> $accessToken]);
-            }
-
+            session(['auth_info' => $auth_info]);
             return redirect()->route('wpapi.posts')->with('message', 'Access token has been updated');
         }
         catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -51,6 +37,6 @@ class AuthController extends Controller{
             $errors = $e->getResponse()->getBody();
             return response($errors,$e->getCode());
         }
-    }//end of processToken
+    }
 
 }

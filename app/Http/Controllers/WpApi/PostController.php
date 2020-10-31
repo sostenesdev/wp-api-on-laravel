@@ -14,7 +14,7 @@ class PostController{
                 'form_params' => $data,
                 'headers' => [
                     'Accept' => 'application/json',
-                    'authorization' => 'Bearer '.session('access-token'),
+                    'authorization' => 'Bearer '.session('auth_info')->token,
                     'cache-control' => 'no-cache'
                 ]
             ];

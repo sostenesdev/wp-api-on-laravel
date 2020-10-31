@@ -21,4 +21,6 @@ Route::get('/', function () {
 Route::get('get-token','App\Http\Controllers\WpApi\AuthController@getToken');
 //Route::get('get-token',[AuthController::class, 'getToken'])->name('get-token');
 Route::get('process-token','App\Http\Controllers\WpApi\AuthController@processToken');
+Route::get('get-user-token','App\Http\Controllers\WpApi\AuthController@getUserToken');
+Route::get('get-access-token','App\Http\Controllers\WpApi\AuthController@getAccessToken');
 Route::get('posts','App\Http\Controllers\WpApi\PostController@all')->name('wpapi.posts');
