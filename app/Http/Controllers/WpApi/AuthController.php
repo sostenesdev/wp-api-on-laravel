@@ -30,7 +30,7 @@ class AuthController extends Controller{
             $auth_info = (object)$decodedBody['data'];
 
             session(['auth_info' => $auth_info]);
-            return redirect()->route('wpapi.posts')->with('message', 'Access token has been updated');
+            return redirect()->route('wpapi.posts.insert')->with('message', 'Access token has been updated');
         }
         catch (\GuzzleHttp\Exception\RequestException $e) {
             //dd($client->request('POST', $url, $params));

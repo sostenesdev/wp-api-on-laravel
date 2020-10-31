@@ -24,3 +24,4 @@ Route::get('process-token','App\Http\Controllers\WpApi\AuthController@processTok
 Route::get('get-user-token','App\Http\Controllers\WpApi\AuthController@getUserToken');
 Route::get('get-access-token','App\Http\Controllers\WpApi\AuthController@getAccessToken');
 Route::get('posts','App\Http\Controllers\WpApi\PostController@all')->name('wpapi.posts');
+Route::get('posts','App\Http\Controllers\WpApi\PostController@insert')->name('wpapi.posts.insert');
