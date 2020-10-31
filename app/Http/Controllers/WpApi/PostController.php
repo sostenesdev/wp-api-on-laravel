@@ -37,15 +37,15 @@ public function insert(Request $request){
     $url = config('services.wp_api.url').'/wp-json/wp/v2/posts';
     $data = [
         'slug'=> 'apenas-um-teste',
-        'status'=> 'pending',
         'title'=> 'Apenas um teste',
         'content'=> 'Apenas um teste',
         'author'=> '2',
         'excerpt'=> 'Apenas um teste',
-        'featured_media'=> 23,
-        'comment_status'=> 'open',
-        'ping_status'=> 'open',
-        'format'=> 'standard',
+        'featured_media'=> 23, // É minha logo
+        'status'=> 'pending', //publish, future, draft, pending, private
+        'comment_status'=> 'open', // open, closed
+        'ping_status'=> 'open', // open, closed
+        'format'=> 'standard',//standard, aside, chat, gallery, link, image, quote, status, video, audio
     ];
 
     $params = [
